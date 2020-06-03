@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment [(ngModel)]="selected" [ngModelOptions]="{standalone: true}">
+      <ion-segment-button value="all" (click)="GetMedicalRecords()">
+        Mi Familia
+      </ion-segment-button>
+      <ion-segment-button value="mines">
+        Mis Registros
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngSwitch]="selected" [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngSwitchCase="'all'">
+    <ion-searchbar [(ngModel)]="searchInput" [ngModelOptions]="{standalone: true}" placeholder="Buscar por nombre"></ion-searchbar>
+
+    <ion-label *ngIf="loading">Cargando...
+      <ion-spinner *ngIf="loading"></ion-spinner>
+    </ion-label>
+
+    <div *ngIf="!loading">
+      <ion-card *ngFor="let m of medicalRecords">
+        <ion-card-header>
+          <ion-card-subtitle>{{ m.date | date: 'dd/LL/yyyy hh:mm a' }}</ion-card-subtitle>
+          <ion-card-title>{{ m.recordName }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p>Info Adicional: {{ m.description }}</p>
+            </ion-row>
+            <ion-row>
+              <p>Cantidad: {{ m.quantity }}</p>
+            </ion-row>
+            <ion-row>
+              <p>Usuario: {{ m.username }}</p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'mines'">
+    <ion-label *ngIf="loading">Cargando...
+      <ion-spinner *ngIf="loading"></ion-spinner>
+    </ion-label>
+
+    <div *ngIf="!loading">
+      <ion-card *ngFor="let m of myMedicalRecords">
+        <ion-card-header>
+          <ion-card-subtitle>{{ m.date | date: 'dd/LL/yyyy hh:mm a' }}</ion-card-subtitle>
+          <ion-card-title>{{ m.recordName }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p>Info Adicional: {{ m.description }}</p>
+            </ion-row>
+            <ion-row>
+              <p>Cantidad: {{ m.quantity }}</p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-fab (click)="NewRecord()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

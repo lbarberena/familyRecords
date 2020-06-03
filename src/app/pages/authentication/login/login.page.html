@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="authForm" (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" shape="round" type="submit" [disabled]="!authForm.valid">Iniciar Sesión</ion-button>
+  </form>
+
+  <ion-button size="full" color="tertiary" shape="round" (click)="Register()">Registrarme</ion-button>
+  <ion-button size="full" color="tertiary" shape="round" (click)="ForgotPassword()">¿Olvidaste la contraseña?</ion-button>
+
+</ion-content>

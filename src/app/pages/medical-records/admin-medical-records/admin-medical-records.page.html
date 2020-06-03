@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuevo Registo Médico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="newRecord">
+    <ion-item>
+      <ion-label position="floating">Nombre de Registro</ion-label>
+      <ion-input type="text" formControlName="recordName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Información Adicional</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Cantidad</ion-label>
+      <ion-input type="number" formControlName="quantity"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Fecha</ion-label>
+      <ion-datetime cancelText="Cancelar" doneText="Aceptar"
+                    [(ngModel)]="date" [ngModelOptions]="{standalone: true}"
+                    displayFormat="DD MMM YYYY"
+                    min="1997"
+                    max="2035"
+                    monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Hora</ion-label>
+      <ion-datetime cancelText="Cancelar" doneText="Aceptar"
+                    [(ngModel)]="hour" [ngModelOptions]="{standalone: true}"
+                    displayFormat="hh:mm A"
+                    monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+      ></ion-datetime>
+    </ion-item>
+
+  </form>
+
+  <ion-button expand="full" [disabled]="!newRecord.valid" (click)="SaveRecord()">Guardar Registro</ion-button>
+
+</ion-content>
