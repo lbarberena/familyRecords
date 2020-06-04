@@ -1,0 +1,88 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Mi Cuenta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="loading">
+    <ion-card class="welcome-card">
+      <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+      <ion-card-header>
+        <ion-card-subtitle><p><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></p></ion-card-subtitle>
+        <ion-card-title><p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 40%"></ion-skeleton-text></p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="welcome-card">
+      <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+      <ion-card-header>
+        <ion-card-subtitle><p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p></ion-card-subtitle>
+        <ion-card-title><p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="welcome-card">
+      <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+      <ion-card-header>
+        <ion-card-subtitle><p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p></ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="!loading">
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>@{{username}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-icon name="person-outline"></ion-icon>: {{name}}</p>
+        <p><ion-icon name="mail-outline"></ion-icon>: {{userEmail}}</p>
+        <p>Creación <ion-icon name="calendar-outline"></ion-icon>: {{creationDate | date: 'dd/LL/yyyy'}}</p>
+        <ion-button (click)="presentModalEditAccount()" size="small" shape="round"><ion-icon name="pencil-outline"></ion-icon> Editar mi cuenta</ion-button>
+<!--        <img src="../assets/icon/technic.png">-->
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-subtitle>Familia</ion-card-subtitle>
+        <ion-card-title>{{userFamily}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>Acciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-col>
+            <ion-button (click)="presentActionSheet()" size="small" shape="round"><ion-icon name="pencil-outline"></ion-icon> Mi familia</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button size="small" (click)="logout()" shape="round" color="danger"><ion-icon name="power-outline"></ion-icon> Cerrar Sesión</ion-button>
+          </ion-col>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
