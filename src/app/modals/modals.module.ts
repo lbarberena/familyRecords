@@ -12,6 +12,7 @@ import {EditAccountModalPage} from './edit-account-modal/edit-account-modal.page
 import {EditFamilyUsersModalPage} from './edit-family-users-modal/edit-family-users-modal.page';
 import {ViewFamilyModalPage} from './view-family-modal/view-family-modal.page';
 import {ChangePasswordModalPage} from './change-password-modal/change-password-modal.page';
+import {RegisterNewMemberModalPage} from './register-new-member-modal/register-new-member-modal.page';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {ChangePasswordModalPage} from './change-password-modal/change-password-m
     EditAccountModalPage,
     EditFamilyUsersModalPage,
     ViewFamilyModalPage,
-    ChangePasswordModalPage
+    ChangePasswordModalPage,
+      RegisterNewMemberModalPage
   ]
 })
 export class ModalsModule {}

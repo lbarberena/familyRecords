@@ -6,6 +6,7 @@ import {NewFamilyModalPage} from '../../modals/new-family-modal/new-family-modal
 import {EditAccountModalPage} from '../../modals/edit-account-modal/edit-account-modal.page';
 import {ViewFamilyModalPage} from '../../modals/view-family-modal/view-family-modal.page';
 import {EditFamilyUsersModalPage} from '../../modals/edit-family-users-modal/edit-family-users-modal.page';
+import {RegisterNewMemberModalPage} from '../../modals/register-new-member-modal/register-new-member-modal.page';
 
 @Component({
   selector: 'app-tab3',
@@ -153,7 +154,7 @@ export class Tab3Page implements OnInit {
 
   async presentModalRegisterNewMenber() {
     const modal = await this.modalController.create({
-      component: EditAccountModalPage,
+      component: RegisterNewMemberModalPage,
     });
     return await modal.present();
   }

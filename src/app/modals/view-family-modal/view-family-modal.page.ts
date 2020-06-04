@@ -13,6 +13,8 @@ export class ViewFamilyModalPage implements OnInit {
   ID: string;
   loading = false;
   familyMembers = [];
+  active: false;
+  loggedIn = [];
 
   constructor(private authService: AuthService,
               public modalController: ModalController,
@@ -45,6 +47,8 @@ export class ViewFamilyModalPage implements OnInit {
         await TOAST.present();
       } else {
         this.familyMembers = (await res.data);
+        this.active = (await  res.data.active);
+        this.loggedIn = (await res.data.loggedin);
         this.loading = false;
       }
     });
