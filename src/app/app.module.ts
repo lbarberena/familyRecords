@@ -19,6 +19,7 @@ import { ErrorService } from './services/error.service';
 import {AuthenticationModule} from './pages/authentication/authentication.module';
 import {LoginPage} from './pages/authentication/login/login.page';
 import {RegisterPage} from './pages/authentication/register/register.page';
+import { Camera } from '@ionic-native/camera/ngx';
 
 export function tokenGetterFactory() {
   return localStorage.getItem('auth-token');
@@ -44,7 +45,7 @@ export function tokenGetterFactory() {
         authScheme: '',
         tokenGetter: tokenGetterFactory,
         whitelistedDomains: ['localhost:8000', 'localhost:8100', 'localhost:8080', 'localhost:4200', 'localhost:3000',
-          'api-tech-nic.herokuapp.com']
+          'family-records.herokuapp.com']
       }
     })
   ],
@@ -53,6 +54,7 @@ export function tokenGetterFactory() {
     SplashScreen,
     AuthService,
     ErrorService,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

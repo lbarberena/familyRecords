@@ -10,15 +10,46 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card class="welcome-card">
-    <ion-card-header>
-      <ion-card-subtitle>Supermercado</ion-card-subtitle>
-      <ion-card-title>Gastos Mensuales</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #barChart></canvas>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-slides class="ion-slides" pager="true" [options]="slideOpts">
+
+    <ion-slide>
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Supermercado</ion-card-subtitle>
+          <ion-card-title>Gastos Mensuales</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Supermercado</ion-card-subtitle>
+          <ion-card-title>Gastos Mensuales</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Supermercado</ion-card-subtitle>
+          <ion-card-title>Gastos Mensuales</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
 
   <ion-item-divider>
     <h1>Listado de Facturas</h1>
@@ -33,7 +64,6 @@
       <p>Aquí ira la info de los gastos detallada</p>
     </ion-card-content>
   </ion-card>
-
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-subtitle>Supermercado</ion-card-subtitle>

@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.medical-records-info-modal-css .modal-wrapper {
+  height: 35%;
+  top: 65%;
+  position: absolute;
+  display: block;
+}
+
+.new-family-modal-css .modal-wrapper {
+  height: 50%;
+  top: 50%;
+  position: absolute;
+  display: block;
+}

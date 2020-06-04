@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: false,
+  apiURL: 'https://family-records.herokuapp.com/api'
 };

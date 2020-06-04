@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MedicalRecordsService} from '../../../services/medical-records.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastController} from '@ionic/angular';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-admin-medical-records',
@@ -16,12 +17,31 @@ export class AdminMedicalRecordsPage implements OnInit {
   userFamily: string;
   date: string;
   hour: string;
+  imageURI: string;
+
+  private optionsCamera: CameraOptions = {
+    quality: 100,
+    targetWidth: 600,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  };
+
+  private optionsGallery: CameraOptions = {
+    quality: 100,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  };
 
   constructor(private medicalRecordsService: MedicalRecordsService,
               private router: Router,
               private formBuilder: FormBuilder,
               private toastController: ToastController,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private camera: Camera) { }
 
   ngOnInit() {
     this.userFamily = this.route.snapshot.paramMap.get('userFamily');
@@ -31,25 +51,27 @@ export class AdminMedicalRecordsPage implements OnInit {
       description: [''],
       quantity: ['', Validators.required],
       date: [''],
-      username: ['']
+      username: [''],
+      imageURI: ['']
     });
   }
 
   SaveRecord() {
     this.newRecord.patchValue({
       date: this.CreateTheDate(),
-      username: localStorage.getItem('user')
+      username: localStorage.getItem('user'),
+      imageURI: this.imageURI
     });
     const form = this.newRecord.value;
-    console.log(form);
-    /*this.medicalRecordsService.POST(form, this.userId, this.userFamily).subscribe( async (res) => {
+
+    this.medicalRecordsService.POST(form, this.userId, this.userFamily).subscribe( async (res) => {
       if ( res.success ) {
         const TOAST = await this.toastController.create({
           duration: 15,
           message: 'Registro Guardado'
         });
         await TOAST.present();
-        this.router.navigateByUrl(`/tabs/medical-records/medicalRecord/${this.userId}/${this.userFamily}`);
+        await this.router.navigateByUrl(`/tabs/medical-records/medicalRecord/${this.userId}/${this.userFamily}`);
       } else {
         const TOAST = await this.toastController.create({
           duration: 15,
@@ -57,12 +79,29 @@ export class AdminMedicalRecordsPage implements OnInit {
         });
         await TOAST.present();
       }
-    });*/
+    });
   }
 
   CreateTheDate(): string {
-    const newDate: string = this.date + ' ' + this.hour;
-    return newDate;
+    const newDate: string = this.date.substr(0, 10);
+    const newHour: string = this.hour.substr(10, 29);
+    return `${newDate}${newHour}`;
+  }
+
+  OpenCamera() {
+    this.camera.getPicture(this.optionsCamera).then((imageData) => this.imageURI = imageData,
+        (err) => {
+      // Handle error
+      console.log(err);
+    });
+  }
+
+  OpenGallery() {
+    this.camera.getPicture(this.optionsGallery).then((imageData) => this.imageURI = imageData,
+        (err) => {
+      // Handle error
+      console.log(err);
+    });
   }
 
 }

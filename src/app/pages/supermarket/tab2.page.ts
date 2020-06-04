@@ -10,6 +10,11 @@ export class Tab2Page implements OnInit{
   @ViewChild('barChart') barChart;
   bars: any;
 
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
+
   constructor() {}
 
   ngOnInit(): void {

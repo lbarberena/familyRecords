@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MedicalRecordsService} from '../../services/medical-records.service';
 import {Router} from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {NewFamilyModalPage} from '../../modals/new-family-modal/new-family-modal.page';
+import {MedicalRecordInfoModalPage} from '../../modals/medical-record-info-modal/medical-record-info-modal.page';
 
 @Component({
   selector: 'app-records',
@@ -17,7 +20,8 @@ export class MedicalRecordsPage implements OnInit {
   selected;
   searchInput;
   constructor(private medicalRecordsService: MedicalRecordsService,
-              private router: Router) {}
+              private router: Router,
+              public modalController: ModalController) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -58,5 +62,26 @@ export class MedicalRecordsPage implements OnInit {
 
   NewRecord() {
     this.router.navigateByUrl(`/tabs/medical-records/adminMedicalRecord/${this.userId}/${this.userFamily}`);
+  }
+
+  async PresentModal(medicalRecordId: string, medicalRecordName: string) {
+    localStorage.setItem('medicalRecordId', medicalRecordId);
+    localStorage.setItem('medicalRecordName', medicalRecordName);
+    const modal = await this.modalController.create({
+      component: MedicalRecordInfoModalPage,
+      cssClass: 'medical-records-info-modal-css'
+    });
+
+    modal.onDidDismiss().then( () => {
+      this.ClearView();
+      this.GetMyMedicalRecords();
+      this.GetMedicalRecords();
+    });
+    return await modal.present();
+  }
+
+  ClearView() {
+    this.medicalRecords = [];
+    this.myMedicalRecords = [];
   }
 }

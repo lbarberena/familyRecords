@@ -21,14 +21,12 @@
   </ion-refresher>
 
   <div *ngSwitchCase="'all'">
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
     <ion-searchbar [(ngModel)]="searchInput" [ngModelOptions]="{standalone: true}" placeholder="Buscar por nombre"></ion-searchbar>
 
-    <ion-label *ngIf="loading">Cargando...
-      <ion-spinner *ngIf="loading"></ion-spinner>
-    </ion-label>
 
     <div *ngIf="!loading">
-      <ion-card *ngFor="let m of medicalRecords">
+      <ion-card *ngFor="let m of medicalRecords" (click)="PresentModal(m._id, m.recordName)">
         <ion-card-header>
           <ion-card-subtitle>{{ m.date | date: 'dd/LL/yyyy hh:mm a' }}</ion-card-subtitle>
           <ion-card-title>{{ m.recordName }}</ion-card-title>
@@ -49,15 +47,120 @@
         </ion-card-content>
       </ion-card>
     </div>
+
+    <div *ngIf="loading">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
   <div *ngSwitchCase="'mines'">
-    <ion-label *ngIf="loading">Cargando...
-      <ion-spinner *ngIf="loading"></ion-spinner>
-    </ion-label>
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
 
     <div *ngIf="!loading">
-      <ion-card *ngFor="let m of myMedicalRecords">
+      <ion-card *ngFor="let m of myMedicalRecords" (click)="PresentModal(m._id, m.recordName)">
         <ion-card-header>
           <ion-card-subtitle>{{ m.date | date: 'dd/LL/yyyy hh:mm a' }}</ion-card-subtitle>
           <ion-card-title>{{ m.recordName }}</ion-card-title>
@@ -70,6 +173,113 @@
             </ion-row>
             <ion-row>
               <p>Cantidad: {{ m.quantity }}</p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="loading">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%; height: 35%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-subtitle>
+          <ion-card-title><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+            </ion-row>
+            <ion-row>
+              <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
             </ion-row>
           </ion-grid>
         </ion-card-content>

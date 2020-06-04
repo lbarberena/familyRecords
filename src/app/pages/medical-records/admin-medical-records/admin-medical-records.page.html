@@ -45,6 +45,26 @@
       ></ion-datetime>
     </ion-item>
 
+    <!--<ion-item>
+      <ion-label position="fixed">Añadir Foto</ion-label>
+      <ion-button color="warning" (click)="OpenCamera()"><ion-icon name="camera-outline"></ion-icon></ion-button>
+      <ion-button color="warning" (click)="OpenGallery()"><ion-icon name="image-outline"></ion-icon></ion-button>
+    </ion-item>-->
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Añadir Foto</ion-card-subtitle>
+        <ion-card-title>
+          <ion-button color="warning" (click)="OpenCamera()"><ion-icon name="camera-outline"></ion-icon></ion-button>
+          <ion-button color="warning" (click)="OpenGallery()"><ion-icon name="image-outline"></ion-icon></ion-button>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img [src]="imageURI"/>
+      </ion-card-content>
+    </ion-card>
+
   </form>
 
   <ion-button expand="full" [disabled]="!newRecord.valid" (click)="SaveRecord()">Guardar Registro</ion-button>

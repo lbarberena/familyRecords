@@ -7,4 +7,5 @@ export interface MedicalRecordsModel {
     family: string;
     date: string;
     username: string;
+    imageURI: string;
 }

@@ -91,7 +91,7 @@ export class AuthService {
     }
 
     GetById( idUser: string, userId: string, userFamily: string ): Observable<any> {
-        return this.http.get<GenericResponseModel>(`${this.url}/users/${userId}/${userFamily}/${ idUser }`)
+        return this.http.get<GenericResponseModel>(`${this.url}/users/${userId}/${userFamily}/id/${ idUser }`)
             .pipe(
                 retry( 1 ),
                 catchError( this.errorService.handleError )
