@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewFamilyModalPage } from './new-family-modal/new-family-modal.page';
 import {MedicalRecordInfoModalPage} from './medical-record-info-modal/medical-record-info-modal.page';
 import {EditAccountModalPage} from './edit-account-modal/edit-account-modal.page';
+import {ViewFamilyModalPage} from './view-family-modal/view-family-modal.page';
+import {EditFamilyUsersModalPage} from './edit-family-users-modal/edit-family-users-modal.page';
 
 const routes: Routes = [
   {
@@ -20,11 +22,11 @@ const routes: Routes = [
   },
   {
     path: 'view-family-modal',
-    loadChildren: () => import('./view-family-modal/view-family-modal.module').then( m => m.ViewFamilyModalPageModule)
+    component: ViewFamilyModalPage
   },
   {
     path: 'edit-family-users-modal',
-    loadChildren: () => import('./edit-family-users-modal/edit-family-users-modal.module').then( m => m.EditFamilyUsersModalPageModule)
+    component: EditFamilyUsersModalPage
   }
 ];
 
