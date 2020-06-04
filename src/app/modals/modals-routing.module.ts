@@ -6,6 +6,7 @@ import {MedicalRecordInfoModalPage} from './medical-record-info-modal/medical-re
 import {EditAccountModalPage} from './edit-account-modal/edit-account-modal.page';
 import {ViewFamilyModalPage} from './view-family-modal/view-family-modal.page';
 import {EditFamilyUsersModalPage} from './edit-family-users-modal/edit-family-users-modal.page';
+import {ChangePasswordModalPage} from './change-password-modal/change-password-modal.page';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'edit-family-users-modal',
     component: EditFamilyUsersModalPage
+  },
+  {
+    path: 'change-password-modal',
+    component: ChangePasswordModalPage
   }
 ];
 

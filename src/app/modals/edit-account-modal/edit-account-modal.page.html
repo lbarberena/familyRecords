@@ -50,7 +50,7 @@
 
     </form>
 
-    <ion-button expand="full">Cambiar Contraseña</ion-button>
+    <ion-button (click)="presentModalChangePassword()" expand="full">Cambiar Contraseña</ion-button>
     <ion-button expand="full" [disabled]="!registerForm.dirty" (click)="UpdateAccount()">Actualizar Cuenta</ion-button>
   </div>
 

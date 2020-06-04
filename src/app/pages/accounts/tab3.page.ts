@@ -32,8 +32,6 @@ export class Tab3Page implements OnInit {
     this.loading = true;
     this.userId = localStorage.getItem('userId');
     this.userFamily = localStorage.getItem('userFamily');
-    this.name = localStorage.getItem('name');
-    this.username = localStorage.getItem('user');
   }
 
   ionViewWillEnter() {
@@ -70,6 +68,7 @@ export class Tab3Page implements OnInit {
         {
           text: 'Salir',
           handler: ( data ) => {
+            this.SetCloseSession();
             localStorage.removeItem('auth-token');
             localStorage.removeItem('user');
             localStorage.removeItem('userId');
@@ -91,6 +90,7 @@ export class Tab3Page implements OnInit {
         {
           text: 'Aceptar',
           handler: ( data ) => {
+            this.SetCloseSession();
             localStorage.removeItem('auth-token');
             localStorage.removeItem('user');
             localStorage.removeItem('userId');
@@ -155,14 +155,6 @@ export class Tab3Page implements OnInit {
     const modal = await this.modalController.create({
       component: EditAccountModalPage,
     });
-
-    modal.onDidDismiss().then( (data) => {
-      if (data.data.data) {
-        this.loading = true;
-        this.GetAccountInfo();
-        this.PresentChangedInfo();
-      }
-    });
     return await modal.present();
   }
 
@@ -171,11 +163,6 @@ export class Tab3Page implements OnInit {
       component: EditFamilyUsersModalPage
     });
 
-    modal.onDidDismiss().then( (data) => {
-      if (data.data.data) {
-        this.loading = true;
-      }
-    });
     return await modal.present();
   }
 
@@ -184,11 +171,6 @@ export class Tab3Page implements OnInit {
       component: ViewFamilyModalPage
     });
 
-    modal.onDidDismiss().then( (data) => {
-      if (data.data.data) {
-        this.loading = true;
-      }
-    });
     return await modal.present();
   }
 
@@ -196,6 +178,10 @@ export class Tab3Page implements OnInit {
     localStorage.setItem('user', this.username);
     localStorage.setItem('name', this.name);
     localStorage.setItem('userFamily', this.userFamily);
+  }
+
+  SetCloseSession() {
+    this.authService.PUT(this.userId, {loggedin: false}).subscribe(() => {});
   }
 
 }

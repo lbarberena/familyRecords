@@ -26,13 +26,12 @@ export class LoginPage implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
 
-    this.passwordForm = this.formBuilder.group({
-      username: ['', [
-        Validators.required,
-        Validators.minLength(5)
-      ]],
-      password: ['', Validators.required]
+  ionViewDidLeave() {
+    this.authForm.setValue({
+      username: '',
+      password: ''
     });
   }
 
@@ -63,7 +62,7 @@ export class LoginPage implements OnInit {
           } else if (res.success === false) {
             this.ereaseToken(res.msg);
             const TOAST = await this.toastController.create({
-              duration: 15,
+              duration: 30,
               message: res.msg
             });
             await TOAST.present();
@@ -77,7 +76,7 @@ export class LoginPage implements OnInit {
 
   async ereaseToken(msj: string) {
     const TOAST = await this.toastController.create({
-      duration: 15,
+      duration: 30,
       message: msj
     });
     await TOAST.present();

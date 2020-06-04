@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ModalController, ToastController} from '@ionic/angular';
+import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../services/auth.service';
+import {ChangePasswordModalPage} from '../change-password-modal/change-password-modal.page';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit-account-modal',
@@ -18,7 +20,9 @@ export class EditAccountModalPage implements OnInit {
   constructor(public modalController: ModalController,
               public toastController: ToastController,
               private formBuilder: FormBuilder,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              public alertCtrl: AlertController,
+              private router: Router) { }
 
   ngOnInit() {
     this.loading = true;
@@ -96,6 +100,42 @@ export class EditAccountModalPage implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  async presentModalChangePassword() {
+    const modal = await this.modalController.create({
+      component: ChangePasswordModalPage,
+      cssClass: 'edit-account-modal-css'
+    });
+
+    modal.onDidDismiss().then( (data) => {
+      if (data.data.passwordChanged) {
+        this.PresentChangedPassword();
+      }
+    });
+    return await modal.present();
+  }
+
+  async PresentChangedPassword() {
+    const alert = await this.alertCtrl.create({
+      header: 'Has cambiado la contraseña de tu cuenta',
+      subHeader: 'Debes Iniciar Sesión nuevamente',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: ( data ) => {
+            localStorage.removeItem('auth-token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userFamily');
+            localStorage.removeItem('name');
+            this.closeModal();
+            this.router.navigateByUrl('/auth/login');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }
